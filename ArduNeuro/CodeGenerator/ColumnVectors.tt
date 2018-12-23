@@ -1,0 +1,18 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".h" #>
+#pragma once
+#include <stdint.h>
+public:
+
+<#
+
+
+Func<int,string> simplebody = (x) => String.Join(Environment.NewLine, Enumerable.Range(1, x).Select(r => $"double M{r};"));
+Func<int, string> simpleouter = (x) => String.Join(Environment.NewLine, Enumerable.Range(2, x).Select(r => $"struct CV_{r} {{{simplebody(r)}}};"));
+#>
+
+<#=simpleouter(200)#>
