@@ -4,13 +4,15 @@
  Author:	CasparKleijne
 */
 
-#include "MatrixOperations.h"
-#include "CodeGenerator\RowVectors.h"
+#include "CodeGenerator\Matrices.h"
+
 
 // the setup function runs once when you press reset or power the board
 void setup() {
 
-	RV_2 test = { 0,0};
+	CV_2 test = { 0,0};
+	RV_2 test1= Transpose(test);
+
 }
 
 // the loop function runs over and over again until power down or reset

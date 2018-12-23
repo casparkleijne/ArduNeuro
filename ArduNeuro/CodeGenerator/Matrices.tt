@@ -4,3 +4,15 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".h" #>
+#pragma once
+#include <stdint.h>
+#include "RowVectors.h"
+#include "ColumnVectors.h"
+#include "ColumnVectorsTranspose.h"
+public:
+
+<#
+Func<int,int,string> simplebody = (y,x) => String.Join(Environment.NewLine, Enumerable.Range(1, x).Select(r => $"RV_{y} M{r};"));
+Func<int,int, string> simpleouter = (y,x) => String.Join(Environment.NewLine, Enumerable.Range(1, y).SelectMany(c=>Enumerable.Range(1, x).Select(r => $"struct M_{r}x{c} {{{simplebody(c,r)}}};")));
+
+#><#=simpleouter(5,5)#>

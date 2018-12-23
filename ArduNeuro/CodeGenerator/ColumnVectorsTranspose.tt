@@ -1,0 +1,20 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".h" #>
+#pragma once
+#include <stdint.h>
+#include "RowVectors.h"
+#include "ColumnVectors.h"
+public:
+
+<#
+
+
+Func<int,string> simplebody = (x) => "return " + String.Join("," + Environment.NewLine, Enumerable.Range(1, x).Select(r => $"value.M{r}"));
+Func<int, string> simpleouter = (x) => String.Join(Environment.NewLine, Enumerable.Range(1, x).Select(r => $"RV_{r} Transpose(CV_{r} value) {{{simplebody(r)}}};"));
+#>
+
+<#=simpleouter(5)#>

@@ -45,6 +45,24 @@
     <Compile Include="ScratschPad.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="RowVectorsTranspose.h">
+      <DependentUpon>RowVectorsTranspose.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="RowVectorsTranspose.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RowVectorsTranspose.h</LastGenOutput>
+    </Content>
+    <Content Include="ColumnVectorsTranspose.h">
+      <DependentUpon>ColumnVectorsTranspose.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="ColumnVectorsTranspose.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ColumnVectorsTranspose.h</LastGenOutput>
+    </Content>
     <Content Include="Matrices.h">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -21,9 +21,6 @@
     <ClInclude Include="__vm\.ArduNeuro.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MatrixDefinitions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MatrixOperations.h">
       <Filter>Header Files</Filter>
     </ClInclude>

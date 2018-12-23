@@ -116,7 +116,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MatrixDefinitions.h" />
     <ClInclude Include="MatrixOperations.h" />
     <ClInclude Include="__vm\.ArduNeuro.vsarduino.h" />
   </ItemGroup>
