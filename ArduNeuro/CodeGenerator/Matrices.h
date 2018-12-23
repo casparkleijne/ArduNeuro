@@ -1,8 +1,11 @@
 ﻿#pragma once
 #include <stdint.h>
 #include "RowVectors.h"
+
 #include "ColumnVectors.h"
+#include "RowVectorsTranspose.h"
 #include "ColumnVectorsTranspose.h"
+#include "MatricesTranspose.h"
 public:
 
 	struct M_1x1 { RV_1 M1; };
