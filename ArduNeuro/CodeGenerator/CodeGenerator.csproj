@@ -49,6 +49,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ColumnVectors.tt</DependentUpon>
     </Content>
+    <Content Include="ColumnVectorsTranspose.h">
+      <DependentUpon>ColumnVectorsTranspose.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Content>
+    <Content Include="ColumnVectorsTranspose.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ColumnVectorsTranspose.h</LastGenOutput>
+    </Content>
     <Content Include="Matrices.h">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -62,6 +71,15 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ColumnVectors.h</LastGenOutput>
     </Content>
+    <Content Include="MatricesTranspose.h">
+      <DependentUpon>MatricesTranspose.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Content>
+    <Content Include="MatricesTranspose.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MatricesTranspose.h</LastGenOutput>
+    </Content>
     <Content Include="RowVectors.h">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,6 +88,15 @@
     <Content Include="RowVectors.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RowVectors.h</LastGenOutput>
+    </Content>
+    <Content Include="RowVectorsTranspose.h">
+      <DependentUpon>RowVectorsTranspose.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Content>
+    <Content Include="RowVectorsTranspose.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RowVectorsTranspose.h</LastGenOutput>
     </Content>
     <Content Include="Settings.h">
       <AutoGen>True</AutoGen>

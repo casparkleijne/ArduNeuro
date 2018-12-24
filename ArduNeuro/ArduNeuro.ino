@@ -6,6 +6,8 @@
 
 #include "CodeGenerator\Matrices.h"
 #include "CodeGenerator\ColumnVectors.h"
+#include "CodeGenerator\ColumnVectorsTranspose.h"
+#include "CodeGenerator\RowVectorsTranspose.h"
 
 // the setup function runs once when you press reset or power the board
 void setup() {
@@ -17,8 +19,9 @@ void setup() {
 
 void Scratch()
 {
-	CV_2 test = { 0,0};
-	
+	CV_3 test = { 0,0};
+	RV_4 test2 = { 0,0,0,0};
+	CV_4 test3 = Transpose(test2);
 }
 
 // the loop function runs over and over again until power down or reset

@@ -1,20 +1,9 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
-<#@ assembly name="System.Core" #>
 <#@ include file="Settings.tt" #>
-<#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Text" #>
-<#@ import namespace="System.Collections.Generic" #>
-<#@ output extension=".h" #>
-#pragma once
-#include <stdint.h>
 #include "RowVectors.h"
 #include "ColumnVectors.h"
-
 <#
-
-
-Func<int,string> simplebody = (x) => "return {" + String.Join("," + Environment.NewLine, Enumerable.Range(1, x).Select(r => $"value.N{r}")) +"};";
-Func<int, string> simpleouter = (x) => String.Join(Environment.NewLine, Enumerable.Range(1, x).Select(r => $"CV_{r} Transpose(RV_{r} value) {{{Environment.NewLine}{simplebody(r)}}};"));
+Func<int,string> simplebody = (x) => "return {" + String.Join(",", Enumerable.Range(1, x).Select(c => $"value.N{c}")) +"};";
+Func<int, string> simpleouter = (x) => String.Join(Environment.NewLine, Enumerable.Range(2, x-1).Select(c => $"// Transposes a rowvector that has [{c}] columns to a columnvector {Environment.NewLine} CV_{c} Transpose(RV_{c} value) {{{simplebody(c)}}};"));
 #>
-
 <#=simpleouter(dim)#>

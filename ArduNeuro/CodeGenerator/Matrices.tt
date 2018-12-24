@@ -2,7 +2,7 @@
 <#@ include file="Settings.tt" #>
 #include "RowVectors.h"
 <#
-Func<int,int,string> simplebody = (y,x) => String.Join(Environment.NewLine, Enumerable.Range(1, x).Select(r => $"RV_{y} M{r};"));
-Func<int,int, string> simpleouter = (y,x) => String.Join(Environment.NewLine, Enumerable.Range(2, y-1).SelectMany(r=>Enumerable.Range(2, x-1).Select(c => $"struct M_{r}x{c} {{{simplebody(c,r)}}};")));
+Func<int,int,string> simplebody = (y,x) => String.Join("", Enumerable.Range(1, x).Select(r => $"RV_{y} M{r};"));
+Func<int,int, string> simpleouter = (y,x) =>String.Join(Environment.NewLine, Enumerable.Range(2, y-1).SelectMany(r=>Enumerable.Range(2, x-1).Select(c => $"// Defines a matrix that is [{r}] rows by [{c}] columns {Environment.NewLine} struct M_{r}x{c} {{{simplebody(c,r)}}};")));
 #>
 <#=simpleouter(dim,dim)#>

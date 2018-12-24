@@ -1,23 +1,8 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
-<#@ assembly name="System.Core" #>
-<#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Text" #>
 <#@ include file="Settings.tt" #>
-<#@ import namespace="System.Collections.Generic" #>
-<#@ output extension=".h" #>
-#pragma once
-#include <stdint.h>
-#include "RowVectors.h"
-#include "ColumnVectors.h"
-public:
-
+#include "Matrices.h"
 <#
-
-
-Func<int,int,string> simplebody = (x,y) => "return {" + String.Join("," + Environment.NewLine,Enumerable.Range(1, y).SelectMany(c =>  Enumerable.Range(1, x).Select(r => $"value.M{r}.N{c}")))+"};";
-Func<int,int, string> simpleouter = (x,y) => String.Join(Environment.NewLine, Enumerable.Range(2, y-1).SelectMany(c => Enumerable.Range(2, x-1).Select(r => $"M_{c}x{r}  Transpose(M_{r}x{c}  value) {{{simplebody(r,c)}}};")));
-
-
+Func<int,int,string> simplebody = (x,y) => "return {" + String.Join(",",Enumerable.Range(1, y).SelectMany(c =>  Enumerable.Range(1, x).Select(r => $"value.M{r}.N{c}")))+"};";
+Func<int,int, string> simpleouter = (x,y) => String.Join(Environment.NewLine, Enumerable.Range(2, y-1).SelectMany(c => Enumerable.Range(2, x-1).Select(r => $"// Transposes a matrix that is [{r}] rows by [{c}] columns to a matrix that has [{c}] rows by [{r}] columns  {Environment.NewLine} M_{c}x{r} Transpose(M_{r}x{c}  value) {{{simplebody(r,c)}}};")));
 #>
-
 <#=simpleouter(dim,dim)#>
