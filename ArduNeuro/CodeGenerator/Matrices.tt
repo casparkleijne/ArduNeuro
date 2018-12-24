@@ -1,5 +1,6 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ assembly name="System.Core" #>
+<#@ include file="Settings.tt" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
@@ -15,4 +16,4 @@ public:
 Func<int,int,string> simplebody = (y,x) => String.Join(Environment.NewLine, Enumerable.Range(1, x).Select(r => $"RV_{y} M{r};"));
 Func<int,int, string> simpleouter = (y,x) => String.Join(Environment.NewLine, Enumerable.Range(1, y).SelectMany(c=>Enumerable.Range(1, x).Select(r => $"struct M_{r}x{c} {{{simplebody(c,r)}}};")));
 
-#><#=simpleouter(5,5)#>
+#><#=simpleouter(dim,dim)#>

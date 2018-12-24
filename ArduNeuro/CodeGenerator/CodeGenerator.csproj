@@ -44,6 +44,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ColumnVectors.h">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ColumnVectors.tt</DependentUpon>
+    </Content>
     <Content Include="MatricesColumnVectorsMultiply.h">
       <DependentUpon>MatricesColumnVectorsMultiply.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -107,11 +112,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Matrices.h</LastGenOutput>
     </Content>
-    <Content Include="ColumnVectors.h">
-      <DependentUpon>ColumnVectors.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Content>
     <Content Include="ColumnVectors.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ColumnVectors.h</LastGenOutput>
@@ -124,6 +124,15 @@
     <Content Include="RowVectors.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RowVectors.h</LastGenOutput>
+    </Content>
+    <Content Include="Settings.h">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Settings.tt</DependentUpon>
+    </Content>
+    <Content Include="Settings.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Settings.h</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

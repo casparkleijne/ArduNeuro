@@ -1,6 +1,7 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
+<#@ include file="Settings.tt" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".h" #>
@@ -20,4 +21,4 @@ Enumerable.Range(2, r-1).SelectMany(y=>
 Enumerable.Range(2, c-1).Select((x)=> $"M_{x}x{1} Multiply(RV_{x} left, M_{y}x{x} right){{{simplebody(x,y)};}}"))
 );
 
-#><#=complexouter(5,5)#>
+#><#=complexouter(dim,dim)#>
