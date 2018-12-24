@@ -4,6 +4,8 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".h" #>
+#pragma once
+#include <stdint.h>
 <#
 	int dim = 5;
 #>

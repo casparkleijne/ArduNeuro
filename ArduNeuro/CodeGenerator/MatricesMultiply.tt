@@ -9,9 +9,6 @@
 #pragma once
 #include <stdint.h>
 #include "Matrices.h"
-#include "RowVectors.h"
-#include "ColumnVectors.h"
-#include "ColumnVectorsTranspose.h"
 public:
 
 <#

@@ -1,7 +1,5 @@
 ﻿#pragma once
 #include <stdint.h>
-#include "RowVectors.h"
-#include "ColumnVectors.h"
 public:
 
 

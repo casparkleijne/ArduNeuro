@@ -49,60 +49,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ColumnVectors.tt</DependentUpon>
     </Content>
-    <Content Include="MatricesColumnVectorsMultiply.h">
-      <DependentUpon>MatricesColumnVectorsMultiply.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Content>
-    <Content Include="MatricesColumnVectorsMultiply.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MatricesColumnVectorsMultiply.h</LastGenOutput>
-    </Content>
-    <Content Include="RowVectorsMatricesMultiply.h">
-      <DependentUpon>RowVectorsMatricesMultiply.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Content>
-    <Content Include="RowVectorsMatricesMultiply.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RowVectorsMatricesMultiply.h</LastGenOutput>
-    </Content>
-    <Content Include="MatricesTranspose.h">
-      <DependentUpon>MatricesTranspose.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Content>
-    <Content Include="MatricesTranspose.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MatricesTranspose.h</LastGenOutput>
-    </Content>
-    <Content Include="MatricesMultiply.h">
-      <DependentUpon>MatricesMultiply.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Content>
-    <Content Include="MatricesMultiply.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MatricesMultiply.h</LastGenOutput>
-    </Content>
-    <Content Include="RowVectorsTranspose.h">
-      <DependentUpon>RowVectorsTranspose.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Content>
-    <Content Include="RowVectorsTranspose.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RowVectorsTranspose.h</LastGenOutput>
-    </Content>
-    <Content Include="ColumnVectorsTranspose.h">
-      <DependentUpon>ColumnVectorsTranspose.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Content>
-    <Content Include="ColumnVectorsTranspose.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ColumnVectorsTranspose.h</LastGenOutput>
-    </Content>
     <Content Include="Matrices.h">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

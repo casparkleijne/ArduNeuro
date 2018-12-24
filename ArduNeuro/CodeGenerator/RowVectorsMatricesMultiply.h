@@ -1,9 +1,6 @@
 ﻿#pragma once
 #include <stdint.h>
 #include "Matrices.h"
-#include "RowVectors.h"
-#include "ColumnVectors.h"
-#include "ColumnVectorsTranspose.h"
 public:
 
 M_2x1 Multiply(RV_2 left, M_2x2 right){return left.N1 * right.M1.N1+
