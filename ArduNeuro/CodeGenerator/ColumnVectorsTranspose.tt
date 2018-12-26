@@ -4,6 +4,6 @@
 #include "ColumnVectors.h"
 <#
 Func<int,string> simplebody = (x) => "return {" + String.Join("," , Enumerable.Range(1, x).Select(r => $"value.M{r}"))+"};";
-Func<int, string> simpleouter = (x) => String.Join(Environment.NewLine, Enumerable.Range(2, x-1).Select(r => $"// Transposes a columnvector that has [{r}] row to a rowvector {Environment.NewLine} RV_{r} Transpose(CV_{r} value) {{{simplebody(r)}}};"));
+Func<int, string> simpleouter = (x) => String.Join(Environment.NewLine, Enumerable.Range(2, x).Select(r => $"// Transposes a columnvector that has [{r}] row to a rowvector {Environment.NewLine} RV_{r} Transpose(CV_{r} value) {{{simplebody(r)}}};"));
 #>
 <#=simpleouter(dim)#>

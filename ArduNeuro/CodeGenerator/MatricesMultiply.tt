@@ -1,22 +1,15 @@
-﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+﻿<#@ template debug="true" hostspecific="false" language="C#" #>
 <#@ include file="Settings.tt" #>
-<#@ assembly name="System.Core" #>
-<#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Text" #>
-<#@ import namespace="System.Collections.Generic" #>
-
-<#@ output extension=".h" #>
-#pragma once
-#include <stdint.h>
 #include "Matrices.h"
-public:
-
+#include "MatricesTranspose.h"
 <#
-Func<int,int,string> simplebody = (x,y) => "return {" + String.Join("+" + Environment.NewLine,Enumerable.Range(1, y).SelectMany(c =>  Enumerable.Range(1, x).Select(r => $"right.N{c} * left.M{r}.N{c}"))) +"}";
-Func<int,int,string> complexouter = (r,c) => String.Join(Environment.NewLine, 
-Enumerable.Range(2, r-1).SelectMany(y=>
-Enumerable.Range(2, r-1).SelectMany(z=> 
-Enumerable.Range(2, c-1).Select((l1)=> $"M_{l1}x{z} Multiply(M_{l1}x{y} left, M_{y}x{z} right){{{simplebody(l1,z)}}}")))
-);
+Func<int,int,int,string> complexinner = (lr,sv,rc) => "return {" + String.Join($",{Environment.NewLine}",Enumerable.Range(1,lr).Select(v=>String.Join($",{Environment.NewLine}",Enumerable.Range(1,rc).Select(k=>String.Join(" + ",Enumerable.Range(1,sv).Select(s=>$"left.M{v}.N{s} * right.M{s}.N{k}")))))) +"};";
 
-#><#=complexouter(dim,dim)#>
+Func<int,string> complexouter = (r) => String.Join(Environment.NewLine, 
+Enumerable.Range(2, r).SelectMany(n=>
+Enumerable.Range(2, r).SelectMany(p=> 
+Enumerable.Range(2, r).Select((m)=> $@"M_{m}x{p} Multiply(M_{m}x{n} left, M_{n}x{p} right){{
+	{complexinner(m,n,p)};
+}}")))
+);
+#><#=complexouter(dim)#>
