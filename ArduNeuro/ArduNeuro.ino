@@ -4,16 +4,27 @@
  Author:	CasparKleijne
 */
 
+#include <LiquidCrystal.h>
+
+
 #include "CodeGenerator\Matrices.h"
 #include "CodeGenerator\ColumnVectors.h"
 #include "CodeGenerator\ColumnVectorsTranspose.h"
 #include "CodeGenerator\RowVectorsTranspose.h"
 #include "CodeGenerator\RowVectorsMultiply.h"
+#include "CodeGenerator\RowVectorsApplyScalar.h"
 #include "CodeGenerator\MatricesTranspose.h"
 #include "CodeGenerator\MatricesMultiply.h"
 
+#include "ExtraMath.h"
+
+LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
+
 // the setup function runs once when you press reset or power the board
 void setup() {
+	lcd.begin(16, 2);              // start the library
+	lcd.setCursor(0, 0);
+	lcd.print("Velleman VMA203"); // print a simple message
 	Scratch();
 
 }
@@ -26,22 +37,21 @@ void loop() {
 	delay(100);
 }
 
+double testFunc(double test)
+{
+	return test + 1;
+}
 void Scratch()
 {
-	CV_3 test = { 0,0 };
-	RV_4 test2 = { 1,2,3,4 };
-	CV_4 test4 = { 5,6,7,8 };
+	RV_3 input = { 0.90f,0.10f,0.80f };
+	M_3x3 input_hidden = { 0.90,0.30,0.40,0.20,0.80,0.20,0.10,0.50,0.60 };
 
-	M_3x4 left = { 1,2,3,4,5,6,7,8,9,10,11,12};
-	M_4x2 right = { 1,2,3,4,5,6,7,8};
+	RV_3 hidden = Multiply(input_hidden,input);
 
-	M_3x2 result = Multiply(left,right);
-
-	Serial.println(result.M1.N1, 2);
-	Serial.println(result.M1.N2, 2);
-    Serial.println(result.M2.N1, 2);
-	Serial.println(result.M2.N2, 2);
-	Serial.println(result.M3.N1, 2);
-	Serial.println(result.M3.N2, 2);
-
+	hidden = ApplyScalar(hidden, Sigmoid);
+	lcd.clear();
+	lcd.setCursor(0, 0);
+	lcd.print(hidden.N1); // print a simple message
+	lcd.print(hidden.N2);
+	lcd.print(hidden.N3);
 }

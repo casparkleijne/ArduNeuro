@@ -10,9 +10,9 @@ Enumerable.Range(1, a).Select(m=> String.Join($", ",Enumerable.Range(1,c).Select
 Func<int,int,int,string> complexheader = (m,n,p) => $"M_{m}x{p} Multiply(M_{m}x{n} left,M_{n}x{p} right)";
 
 Func<int,IEnumerable<string>> complexouter = (d) =>  
-Enumerable.Range(2, d).SelectMany(m=>
-Enumerable.Range(2, d).SelectMany(n=>
-Enumerable.Range(2, d).Select(p=> $"{complexheader(m,n,p)}{Environment.NewLine}{{{Environment.NewLine}return {{{Environment.NewLine}{complexbody(m,n,p)}{Environment.NewLine}}};{Environment.NewLine}}};" )));
+Enumerable.Range(2, d-1).SelectMany(m=>
+Enumerable.Range(2, d-1).SelectMany(n=>
+Enumerable.Range(2, d-1).Select(p=> $"{complexheader(m,n,p)}{Environment.NewLine}{{{Environment.NewLine}return {{{Environment.NewLine}{complexbody(m,n,p)}{Environment.NewLine}}};{Environment.NewLine}}};" )));
 #><#=String.Join(Environment.NewLine,complexouter(dim))#>
 
 
@@ -25,10 +25,23 @@ Enumerable.Range(2, d).Select(p=> $"{complexheader(m,n,p)}{Environment.NewLine}{
 
 Func<int,int,int,string> complexinner2 = (lr,sv,rc) => String.Join($",{Environment.NewLine}",Enumerable.Range(1,rc).Select(v=>String.Join($" + ",Enumerable.Range(1,sv).Select(s=>$"left.N{s} * right.M{s}.N{v}"))));
 Func<int,string> complexouter2 = (r) => String.Join(Environment.NewLine, 
-Enumerable.Range(2, r).SelectMany(n=>
-Enumerable.Range(2, r).Select(p=> $@"RV_{p} Multiply(RV_{n} left, M_{n}x{p} right){{
+Enumerable.Range(2, r-1).SelectMany(n=>
+Enumerable.Range(2, r-1).Select(p=> $@"RV_{p} Multiply(RV_{n} left, M_{n}x{p} right){{
 	return {{{complexinner2(n,n,p)}}};;
 }}"))
 );
 
 #><#=complexouter2(dim)#>
+
+
+<#
+
+Func<int,int,int,string> complexinner3 = (lr,sv,rc) => String.Join($",{Environment.NewLine}",Enumerable.Range(1,lr).Select(v=>String.Join($" + ",Enumerable.Range(1,rc).Select(s=>$"left.M{v}.N{s} * right.N{s}"))));
+Func<int,string> complexouter3 = (r) => String.Join(Environment.NewLine, 
+Enumerable.Range(2, r-1).SelectMany(n=>
+Enumerable.Range(2, r-1).Select(p=> $@"RV_{n} Multiply(M_{n}x{p} left, RV_{p} right){{
+	return {{{complexinner3(n,n,p)}}};
+}}"))
+);
+
+#><#=complexouter3(dim)#>
