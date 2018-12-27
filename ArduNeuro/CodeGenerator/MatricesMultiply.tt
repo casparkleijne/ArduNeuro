@@ -1,15 +1,34 @@
 ﻿<#@ template debug="true" hostspecific="false" language="C#" #>
 <#@ include file="Settings.tt" #>
 #include "Matrices.h"
-#include "MatricesTranspose.h"
-<#
-Func<int,int,int,string> complexinner = (lr,sv,rc) => "return {" + String.Join($",{Environment.NewLine}",Enumerable.Range(1,lr).Select(v=>String.Join($",{Environment.NewLine}",Enumerable.Range(1,rc).Select(k=>String.Join(" + ",Enumerable.Range(1,sv).Select(s=>$"left.M{v}.N{s} * right.M{s}.N{k}")))))) +"};";
 
-Func<int,string> complexouter = (r) => String.Join(Environment.NewLine, 
+<#
+
+Func<int,int,int,string> complexbody = (a,b,c) => String.Join($",{Environment.NewLine}",
+Enumerable.Range(1, a).Select(m=> String.Join($", ",Enumerable.Range(1,c).Select(n=> String.Join($" + ",Enumerable.Range(1, b).Select(p=> $"left.M{m}.N{p} * right.M{p}.N{n}" ))))));
+
+Func<int,int,int,string> complexheader = (m,n,p) => $"M_{m}x{p} Multiply(M_{m}x{n} left,M_{n}x{p} right)";
+
+Func<int,IEnumerable<string>> complexouter = (d) =>  
+Enumerable.Range(2, d).SelectMany(m=>
+Enumerable.Range(2, d).SelectMany(n=>
+Enumerable.Range(2, d).Select(p=> $"{complexheader(m,n,p)}{Environment.NewLine}{{{Environment.NewLine}return {{{Environment.NewLine}{complexbody(m,n,p)}{Environment.NewLine}}};{Environment.NewLine}}};" )));
+#><#=String.Join(Environment.NewLine,complexouter(dim))#>
+
+
+
+
+
+
+
+<#
+
+Func<int,int,int,string> complexinner2 = (lr,sv,rc) => String.Join($",{Environment.NewLine}",Enumerable.Range(1,rc).Select(v=>String.Join($" + ",Enumerable.Range(1,sv).Select(s=>$"left.N{s} * right.M{s}.N{v}"))));
+Func<int,string> complexouter2 = (r) => String.Join(Environment.NewLine, 
 Enumerable.Range(2, r).SelectMany(n=>
-Enumerable.Range(2, r).SelectMany(p=> 
-Enumerable.Range(2, r).Select((m)=> $@"M_{m}x{p} Multiply(M_{m}x{n} left, M_{n}x{p} right){{
-	{complexinner(m,n,p)};
-}}")))
+Enumerable.Range(2, r).Select(p=> $@"RV_{p} Multiply(RV_{n} left, M_{n}x{p} right){{
+	return {{{complexinner2(n,n,p)}}};;
+}}"))
 );
-#><#=complexouter(dim)#>
+
+#><#=complexouter2(dim)#>

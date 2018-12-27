@@ -32,19 +32,16 @@ void Scratch()
 	RV_4 test2 = { 1,2,3,4 };
 	CV_4 test4 = { 5,6,7,8 };
 
-	M_3x4 left = { 1,2,3,4,1,2,3,4,1,2,3,4 };
-	M_4x2 right = { 1,2,3,4,1,2,3,4 };
+	M_3x4 left = { 1,2,3,4,5,6,7,8,9,10,11,12};
+	M_4x2 right = { 1,2,3,4,5,6,7,8};
 
 	M_3x2 result = Multiply(left,right);
 
 	Serial.println(result.M1.N1, 2);
-
 	Serial.println(result.M1.N2, 2);
-
-
-	Serial.println(result.M2.N1, 2);
-
-
+    Serial.println(result.M2.N1, 2);
 	Serial.println(result.M2.N2, 2);
+	Serial.println(result.M3.N1, 2);
+	Serial.println(result.M3.N2, 2);
 
 }
