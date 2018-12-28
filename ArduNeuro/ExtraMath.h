@@ -11,22 +11,17 @@
 
 double Sigmoid(double value)
 {
-	return 1.0f / (1.0f + exp(-value));
-};
-
-double DerivativeSigmoid(double value)
-{
-	return Sigmoid(value) * (1 - Sigmoid(value));
+	return 1.00000000 / (1.00000000 + exp(-value));
 };
 
 double Derivative(double value)
 {
-	return value * (1 - value);
+	return value * (1.00000000 - value);
 };
 
 double Error(double left, double right)
 {
-	return pow((left - right),2) * 0.50 ;
+	return pow((left - right),2) / 2.00000000 ;
 };
 
 double ErrorChange(double left, double right)
@@ -37,4 +32,9 @@ double ErrorChange(double left, double right)
 double Divide(double left, double right)
 {
 	return (left / right);
+};
+
+double Randomize(double value)
+{
+	return (double)rand() / (double)RAND_MAX;
 };
