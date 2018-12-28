@@ -2,6 +2,7 @@
  Name:		ArduNeuro.ino
  Created:	12/20/2018 10:48:49 AM
  Author:	CasparKleijne
+ Tutorial followed: https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/ (check comment by Loftur on error in the tutorial)
 */
 
 #include <LiquidCrystal.h>
@@ -31,7 +32,7 @@ void Scratch()
 
 	RV_2  target = { 0.01,0.99 };
 	RV_2  input = { 0.05,0.10 };
-
+	// there is an error in the tutorial that is fixed in this matrix
 	M_2x2 weight_input_hidden = { 0.15,0.20,0.25,0.30 };
 	M_2x2 weight_hidden_output = { 0.40,0.45,0.50,0.55 };
 
@@ -86,22 +87,22 @@ void Scratch()
 	RV_2 input_change_weight = Multiply(Transpose(weight_hidden_output), output);
 	input_change_weight = AddScalar(input_change_weight, .60);
 
-	double total1 = weight_hidden_output.M1.N1 - learningRate * hidden.N1 * out.N1 * errorchange.N1;
-	double total2 = weight_hidden_output.M1.N2 - learningRate * hidden.N2 * out.N1 * errorchange.N1;
-	double total3 = weight_hidden_output.M2.N1 - learningRate * hidden.N1 * out.N2 * errorchange.N2;
-	double total4 = weight_hidden_output.M2.N2 - learningRate * hidden.N2 * out.N2 * errorchange.N2;
+	double h11 = weight_hidden_output.M1.N1 - learningRate * hidden.N1 * out.N1 * errorchange.N1;
+	double h12 = weight_hidden_output.M1.N2 - learningRate * hidden.N2 * out.N1 * errorchange.N1;
+	double h21 = weight_hidden_output.M2.N1 - learningRate * hidden.N1 * out.N2 * errorchange.N2;
+	double h22 = weight_hidden_output.M2.N2 - learningRate * hidden.N2 * out.N2 * errorchange.N2;
 
 
 
 	Serial.println("- hange:");
-	Serial.println(total1, 11);
-	Serial.println(total2, 11);
-	Serial.println(total3, 11);
-	Serial.println(total4, 11);
+	Serial.println(h11, 11);
+	Serial.println(h12, 11);
+	Serial.println(h21, 11);
+	Serial.println(h22, 11);
 
 	Serial.println("-- fin -- ");
 	//lcd.print(output.N1,3); // print a simple message
-	lcd.print(total1, 11);
-	lcd.setCursor(1, 0);
-	lcd.print(total2, 11);
+	lcd.print(h11, 11);
+	lcd.setCursor(0, 1);
+	lcd.print(h22, 11);
 }
