@@ -4,7 +4,7 @@
  Author:	CasparKleijne
  Tutorial followed: https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/ (check comment by Loftur on error in the tutorial)
 */
-
+// LCD for fun use;
 #include <LiquidCrystal.h>
 #include "ExtraMath.h"
 
@@ -94,7 +94,7 @@ void Scratch()
 
 
 
-	Serial.println("- hange:");
+	Serial.println("- Hidden layer weights Back Propagated:");
 	Serial.println(h11, 11);
 	Serial.println(h12, 11);
 	Serial.println(h21, 11);
