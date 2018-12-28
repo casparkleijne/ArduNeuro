@@ -11,3 +11,15 @@ Func<int,string> simplebody1 = (x) => String.Join(",", Enumerable.Range(1, x).Se
 Func<int, string> simpleouter1 = (x) => String.Join(Environment.NewLine, Enumerable.Range(2, x-1).Select(c => $"// Defines a rowvector that has [{c}] columns {Environment.NewLine} RV_{c} AddScalar(RV_{c} value,double add){{return {{{simplebody1(c)}}};}};"));
 #>
 <#=simpleouter1(dim)#>
+
+<#
+Func<int,string> simplebody2 = (x) => String.Join(",", Enumerable.Range(1, x).Select(c => $"func(left.N{c},right.N{c})"));
+Func<int, string> simpleouter2 = (x) => String.Join(Environment.NewLine, Enumerable.Range(2, x-1).Select(c => $"// Defines a rowvector that has [{c}] columns {Environment.NewLine} RV_{c} ApplyScalar(RV_{c} left,RV_{c} right,double (*func)(double,double)){{return {{{simplebody2(c)}}};}};"));
+#>
+<#=simpleouter2(dim)#>
+
+<#
+Func<int,string> simplebody3 = (x) => String.Join("+", Enumerable.Range(1, x).Select(c => $"value.N{c}"));
+Func<int, string> simpleouter3 = (x) => String.Join(Environment.NewLine, Enumerable.Range(2, x-1).Select(c => $"// Defines a rowvector that has [{c}] columns {Environment.NewLine} double Sum(RV_{c} value){{return {simplebody3(c)};}};"));
+#>
+<#=simpleouter3(dim)#>

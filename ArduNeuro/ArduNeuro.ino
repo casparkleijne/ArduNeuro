@@ -43,8 +43,7 @@ double testFunc(double test)
 }
 void Scratch()
 {
-	RV_2  desired = { 0.01,0.99};
-
+	RV_2  target = { 0.01,0.99};
 	RV_2  input = { 0.05,0.10 };
 	M_2x2 input_hidden = { 0.15,0.20,0.25,0.30 };
 	RV_2  hidden = Multiply(input_hidden,input);
@@ -52,8 +51,8 @@ void Scratch()
 
     hidden = AddScalar(hidden, .35);
 	hidden = ApplyScalar(hidden, Sigmoid);
-	Serial.println(hidden.N1, 5);
-	Serial.println(hidden.N2, 5);
+	//Serial.println(hidden.N1, 5);
+	//Serial.println(hidden.N2, 5);
     
 	M_2x2 hidden_output = { 0.40,0.45,0.50,0.55 };
     RV_2  output = Multiply(hidden_output, hidden);
@@ -63,10 +62,18 @@ void Scratch()
 	Serial.println(output.N1, 5);
 	Serial.println(output.N2, 5);
 
+	RV_2 error = ApplyScalar(target,output,Error);
+		
+	Serial.println(error.N1, 5);
+	Serial.println(error.N2, 5);
+
+	double totalerror = Sum(error);
 	
+	Serial.println(totalerror, 5);
 	
 	lcd.clear();
 	lcd.setCursor(0, 0);
+
 	//lcd.print(output.N1,3); // print a simple message
 	//lcd.print(output.N2,3);
 }
