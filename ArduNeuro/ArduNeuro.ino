@@ -7,6 +7,7 @@
 // LCD for fun use;
 
 #include "ExtraMath.h"
+#include "MemoryFree.h"
 
 struct  NeuralNetwork
 {
@@ -26,8 +27,6 @@ NeuralNetwork nn;
 RV_2  target = { 0.010000,0.990000 };
 RV_2  input = { 0.050000,0.100000 };
 int count = 0;
-RV_2 arrinput[4] = { { 0.010000,0.990000 },{ 0.210000,0.990000 },{ 0.010000,0.990000 },{ 0.010000,0.990000 } };
-RV_2 arroutput[4] = { { 0.050000,0.100000 },{ 0.050000,0.740000 },{ 0.050000,0.100000 },{ 0.050000,0.100000 } };
 
 // there is an error in the tutorial that is fixed in this matrix
 M_2x2 weight_input_hidden = { 0.15,0.20,0.25,0.30 };
@@ -55,23 +54,13 @@ void loop() {
 
 	count++;
 	Scratch();
-
-	
 	delay(10);
 }
 
 void Scratch()
 {
 
-	input = arrinput[count % 4];
-	target = arroutput[count % 4];
-
-	RV_2  hidden = Multiply(weight_input_hidden, input);
-
-	//Serialprintln("FEED FORWARD:");
-
-	hidden = AddScalar(hidden, .350000000); // bias
-	hidden = ApplyScalar(hidden, Sigmoid);
+	RV_2  hidden = ApplyScalar(AddScalar(Multiply(weight_input_hidden, input), .350000000), Sigmoid);
 	RV_2  output = Multiply(weight_hidden_output, hidden);
 
 	output = AddScalar(output, .600000000); // bias
@@ -82,7 +71,9 @@ void Scratch()
 	double totalerror = Sum(error);
 
 	Serial.println(totalerror, 9);
-
+	Serial.print("freeMemory=");
+	Serial.println(freeMemory());
+	
 	// BACK PROP
 
 	RV_2 errorchangehidden = ApplyScalar(target, output, ErrorChange);
@@ -93,7 +84,6 @@ void Scratch()
 	double h12 = weight_hidden_output.M1.N2 - learningRate * hidden.N2 * out.N1 * errorchangehidden.N1;
 	double h21 = weight_hidden_output.M2.N1 - learningRate * hidden.N1 * out.N2 * errorchangehidden.N2;
 	double h22 = weight_hidden_output.M2.N2 - learningRate * hidden.N2 * out.N2 * errorchangehidden.N2;
-
 
 	double w1 = weight_input_hidden.M1.N1 - input.N1 * learningRate * Derivative(hidden.N1) * (weight_hidden_output.M1.N1 * out.N1 * errorchangehidden.N1 + weight_hidden_output.M2.N1 * errorchangehidden.N2 * out.N2);
 	double w2 = weight_input_hidden.M1.N2 - input.N2 * learningRate * Derivative(hidden.N1) * (weight_hidden_output.M1.N1 * out.N1 * errorchangehidden.N1 + weight_hidden_output.M2.N1 * errorchangehidden.N2 * out.N2);
