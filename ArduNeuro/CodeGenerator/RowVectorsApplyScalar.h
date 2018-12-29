@@ -67,3 +67,20 @@
  double Sum(RV_8 value){return value.N1+value.N2+value.N3+value.N4+value.N5+value.N6+value.N7+value.N8;};
 // Defines a rowvector that has [9] columns 
  double Sum(RV_9 value){return value.N1+value.N2+value.N3+value.N4+value.N5+value.N6+value.N7+value.N8+value.N9;};
+
+// Defines a rowvector that has [2] columns 
+ RV_2 MultiplyScalar(RV_2 value,double factor){return {value.N1 * factor,value.N2 * factor};};
+// Defines a rowvector that has [3] columns 
+ RV_3 MultiplyScalar(RV_3 value,double factor){return {value.N1 * factor,value.N2 * factor,value.N3 * factor};};
+// Defines a rowvector that has [4] columns 
+ RV_4 MultiplyScalar(RV_4 value,double factor){return {value.N1 * factor,value.N2 * factor,value.N3 * factor,value.N4 * factor};};
+// Defines a rowvector that has [5] columns 
+ RV_5 MultiplyScalar(RV_5 value,double factor){return {value.N1 * factor,value.N2 * factor,value.N3 * factor,value.N4 * factor,value.N5 * factor};};
+// Defines a rowvector that has [6] columns 
+ RV_6 MultiplyScalar(RV_6 value,double factor){return {value.N1 * factor,value.N2 * factor,value.N3 * factor,value.N4 * factor,value.N5 * factor,value.N6 * factor};};
+// Defines a rowvector that has [7] columns 
+ RV_7 MultiplyScalar(RV_7 value,double factor){return {value.N1 * factor,value.N2 * factor,value.N3 * factor,value.N4 * factor,value.N5 * factor,value.N6 * factor,value.N7 * factor};};
+// Defines a rowvector that has [8] columns 
+ RV_8 MultiplyScalar(RV_8 value,double factor){return {value.N1 * factor,value.N2 * factor,value.N3 * factor,value.N4 * factor,value.N5 * factor,value.N6 * factor,value.N7 * factor,value.N8 * factor};};
+// Defines a rowvector that has [9] columns 
+ RV_9 MultiplyScalar(RV_9 value,double factor){return {value.N1 * factor,value.N2 * factor,value.N3 * factor,value.N4 * factor,value.N5 * factor,value.N6 * factor,value.N7 * factor,value.N8 * factor,value.N9 * factor};};

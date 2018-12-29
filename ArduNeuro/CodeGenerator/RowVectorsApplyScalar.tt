@@ -23,3 +23,9 @@ Func<int,string> simplebody3 = (x) => String.Join("+", Enumerable.Range(1, x).Se
 Func<int, string> simpleouter3 = (x) => String.Join(Environment.NewLine, Enumerable.Range(2, x-1).Select(c => $"// Defines a rowvector that has [{c}] columns {Environment.NewLine} double Sum(RV_{c} value){{return {simplebody3(c)};}};"));
 #>
 <#=simpleouter3(dim)#>
+
+<#
+Func<int,string> simplebody4 = (x) => String.Join(",", Enumerable.Range(1, x).Select(c => $"value.N{c} * factor"));
+Func<int, string> simpleouter4 = (x) => String.Join(Environment.NewLine, Enumerable.Range(2, x-1).Select(c => $"// Defines a rowvector that has [{c}] columns {Environment.NewLine} RV_{c} MultiplyScalar(RV_{c} value,double factor){{return {{{simplebody4(c)}}};}};"));
+#>
+<#=simpleouter4(dim)#>

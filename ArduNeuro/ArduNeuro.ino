@@ -37,8 +37,8 @@ void setup() {
 	mazur.InputWeight =  { 0.15,0.20,0.25,0.30 };
 	mazur.BiasHidden = 0.35;
 	mazur.HiddenWeight = { 0.40,0.45,0.50,0.55 };
-	mazur.BiasOutput = 0.60;
-	mazur.LearningRate = 0.50;
+	mazur.BiasOutput = 0.60000000;
+	mazur.LearningRate = 0.50000000;
 }
 
 
@@ -61,11 +61,13 @@ void Scratch()
 	mazur.ErrorChangeHidden =  ApplyScalar(target, mazur.Output, ErrorChange);
 	mazur.OutputBackPropagate = ApplyScalar(ApplyScalar(mazur.Output, Derivative), mazur.ErrorChangeHidden,Multiply);
 	
-	Serial.println(mazur.TotalError, 9);
+	Serial.println(mazur.TotalError, 8);
 	Serial.print("freeMemory=");
 	Serial.println(freeMemory());
 	
 
+	RV_2 test = ApplyScalar(mazur.Hidden, mazur.OutputBackPropagate, Multiply);
+	
 	double h11 = mazur.HiddenWeight.M1.N1   -   mazur.Hidden.N1 * mazur.LearningRate * mazur.OutputBackPropagate.N1;
 	double h12 = mazur.HiddenWeight.M1.N2   -   mazur.Hidden.N2 * mazur.LearningRate * mazur.OutputBackPropagate.N1;
 	double h21 = mazur.HiddenWeight.M2.N1   -   mazur.Hidden.N1 * mazur.LearningRate * mazur.OutputBackPropagate.N2;
@@ -76,8 +78,27 @@ void Scratch()
 	double w3 = mazur.InputWeight.M2.N1   -     mazur.Input.N1 * mazur.LearningRate * Derivative(mazur.Hidden.N2) * (mazur.HiddenWeight.M1.N2 * mazur.OutputBackPropagate.N1 + mazur.HiddenWeight.M2.N2 * mazur.OutputBackPropagate.N2);
 	double w4 = mazur.InputWeight.M2.N2   -     mazur.Input.N2 * mazur.LearningRate * Derivative(mazur.Hidden.N2) * (mazur.HiddenWeight.M1.N2 * mazur.OutputBackPropagate.N1 + mazur.HiddenWeight.M2.N2 * mazur.OutputBackPropagate.N2);
 
+	mazur.HiddenWeight = { h11,h12,h21,h22 };
+	Serial.print("h11=");
+	Serial.println(h11, 8);
+	Serial.print("h12=");
+	Serial.println(h12, 8);
+	Serial.print("h21=");
+	Serial.println(h21, 8);
+	Serial.print("h22=");
+	Serial.println(h22, 8);
 
 	mazur.InputWeight = { w1,w2,w3,w4 };
-	mazur.HiddenWeight = { h11,h12,h21,h22 };
+	Serial.print("w1=");
+	Serial.println(w1,8);
+	Serial.print("w2=");
+	Serial.println(w2, 8);
+	Serial.print("w3=");
+	Serial.println(w3, 8);
+	Serial.print("w4=");
+	Serial.println(w4, 8);
+
+
+
 	
 }

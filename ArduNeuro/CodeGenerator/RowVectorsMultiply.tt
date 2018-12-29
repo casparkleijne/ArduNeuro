@@ -6,3 +6,9 @@ Func<int,string> simplebody =  (r) => "return " + String.Join(" + ",Enumerable.R
 Func<int, string> simpleouter = (x) => String.Join(Environment.NewLine, Enumerable.Range(2, x-1).Select(c => $"// Multiplies two equal sized rowvectors that have [{c}] columns to a double {Environment.NewLine} double Multiply(RV_{c} left,CV_{c} right) {{{simplebody(c)}}};"));
 #>
 <#=simpleouter(dim)#>
+
+<#
+Func<int,string> simplebody1 =  (r) => "return " + String.Join(" + ",Enumerable.Range(1, r).Select(n=>$"left.N{n} * right.M{n}"))+";";
+Func<int, string> simpleouter1 = (x) => String.Join(Environment.NewLine, Enumerable.Range(2, x-1).Select(c => $"// Multiplies two equal sized rowvectors that have [{c}] columns to a double {Environment.NewLine} double MultiplyScalar(RV_{c} left,CV_{c} right) {{{simplebody1(c)}}};"));
+#>
+<#=simpleouter1(dim)#>
