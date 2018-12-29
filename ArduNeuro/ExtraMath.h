@@ -34,6 +34,16 @@ double Divide(double left, double right)
 	return (left / right);
 };
 
+double Multiply(double left, double right)
+{
+	return left * right;
+};
+
+double Substract(double left, double right)
+{
+	return (left - right);
+};
+
 double Randomize(double value)
 {
 	return (double)rand() / (double)RAND_MAX;
